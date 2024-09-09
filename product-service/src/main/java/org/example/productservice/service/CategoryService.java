@@ -29,23 +29,25 @@ public class CategoryService {
     }
 
     public CategoryResponse findByName(String categoryName) {
+        //noinspection preview
         return categoryRepository
                 .findByName(categoryName)
                 .map(categoryMapper::toCategoryResponse)
                 .orElseThrow(
                         () -> new CategoryNotFoundException(
-                                "Category with name " + categoryName + "not found"
+                                STR."Category with name \{categoryName}not found"
                         )
                 );
     }
 
     public CategoryResponse findById(Long categoryId) {
+        //noinspection preview
         return categoryRepository
                 .findById(categoryId)
                 .map(categoryMapper::toCategoryResponse)
                 .orElseThrow(
                         () -> new CategoryNotFoundException(
-                                "Category with id " + categoryId + "not found"
+                                STR."Category with id \{categoryId}not found"
                         )
                 );
     }
@@ -82,6 +84,7 @@ public class CategoryService {
     )
     public String delete(Long categoryId) {
         categoryRepository.deleteById(categoryId);
-        return "Category with id " + categoryId + "successfully deleted";
+        //noinspection preview
+        return STR."Category with id \{categoryId}successfully deleted";
     }
 }

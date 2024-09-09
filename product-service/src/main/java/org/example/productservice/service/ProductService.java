@@ -33,25 +33,27 @@ public class ProductService {
     }
 
     public ProductResponse findByName(String productName) {
+        //noinspection preview
         return productRepository
                 .findByName(productName)
                 .map(
                         productMapper::toProductResponse
                 ).orElseThrow(
                         () -> new ProductNotFoundException(
-                                "Product with name " + productName + "not found"
+                                STR."Product with name \{productName}not found"
                         )
                 );
     }
 
     public ProductResponse findById(Long productId) {
+        //noinspection preview
         return productRepository
                 .findById(productId)
                 .map(
                         productMapper::toProductResponse
                 ).orElseThrow(
                         () -> new ProductNotFoundException(
-                                "Product with id " + productId + "not found"
+                                STR."Product with id \{productId}not found"
                         )
                 );
     }
@@ -86,7 +88,8 @@ public class ProductService {
     )
     public String deleteById(Long productId) {
         productRepository.deleteById(productId);
-        return "Product with id " + productId + " successfully deleted";
+        //noinspection preview
+        return STR."Product with id \{productId} successfully deleted";
     }
 
     @Transactional(
